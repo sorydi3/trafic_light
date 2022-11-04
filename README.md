@@ -6,4 +6,4 @@ The traffic light is controlled by a button. When the button is pressed, the tra
 
 The traffic light is also controlled by a timer. When the timer expires, the traffic light changes state.
 
-image.png
+![result](sampleScreen.png)
