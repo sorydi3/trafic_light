@@ -2,6 +2,7 @@ import QtQuick 2.15
 import QtQuick.Window 2.15
 
 Window {
+    id: window
     width: 640
     height: 480
     visible: true
@@ -39,6 +40,11 @@ Window {
                     target: luz2
                     color : "red"
                 }
+
+                PropertyChanges {
+                    target: window
+                    color : "lightyellow"
+                }
             },
 
             State {
@@ -52,10 +58,15 @@ Window {
                     target: luz2
                     color : "green"
                 }
+
+                 PropertyChanges {
+                    target: window
+                    color : "lightpink"
+                }
             }
         ]
 
-        state : rojoArriva
+        state : "rojoArriva"
 
         transitions: [
             Transition {
@@ -70,6 +81,12 @@ Window {
 
                 ColorAnimation {
                     target : luz2
+                  properties : "color"
+                    duration : 1000
+                }
+
+                ColorAnimation {
+                    target : window
                   properties : "color"
                     duration : 1000
                 }
@@ -89,6 +106,12 @@ Window {
                     target : luz2
                   properties : "color"
                     duration : 5000
+                }
+
+                ColorAnimation {
+                    target : window
+                    properties : "color"
+                    duration : 1000
                 }
             }
         ]
@@ -146,12 +169,16 @@ Window {
 
         border.color: Qt.darker(color)
 
+        border.width: 2
+
 
         Text {
             id: name
             text: qsTr("Cambiar")
             anchors.centerIn: parent
             color: "white"
+            font.pixelSize: 20
+
         }
 
         MouseArea{
@@ -159,11 +186,11 @@ Window {
             anchors.fill: parent
 
             onClicked: () =>{
-              label.text = "heyyy";
               temporizador.start()
 
               semafor.state === "rojoAbajo" ? semafor.state = "rojoArriva" : semafor.state = "rojoAbajo"
 
+                           label.text = "SEMAFORO INICIADO"
 
            }
 
@@ -188,7 +215,13 @@ Window {
 
         id: temporizador
 
+        interval: 2000
 
+        repeat: false
 
+        onTriggered: () => {
+            label.text = ""
+            temporizador.stop()
+        }
     }
 }
